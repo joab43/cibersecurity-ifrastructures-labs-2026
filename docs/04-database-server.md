@@ -15,7 +15,7 @@ sudo apt update -y
 ```
 
 ### Paso 1 - Instalación de Herramientas
-Ahora instalaremos las herramientas necesarias que utilizara este servidor
+Ahora instalaremos las herramientas necesarias que utilizara este servidor.
 
 ```bash
 sudo apt install mariadb-server mariadb-client openssh-server chrony rsync openssl -y
@@ -37,13 +37,13 @@ Habilitaremos el servicio de la base de datos para que este activa apenas se ini
 sudo systemctl enable mariadb
 ```
 
-Iniciamos el servicio 
+Iniciamos el servicio.
 
 ```bash
 sudo systemctl start mariadb
 ```
 
-Verificamos el estado del servicio el cual debe mostrar `Active`
+Verificamos el estado del servicio el cual debe mostrar `Active (Running)`.
 
 ```bash
 sudo systemctl status mariadb
@@ -52,9 +52,99 @@ sudo systemctl status mariadb
 ### Paso 3 - Configuración SSH y CHRONY
 Antes de configurar la base de datos, pasaremos a configurar los demás servicios necesarios para la conexión con los otros servidores y la sincronización del tiempo para los backups de la base de datos.
 
+#### SSH
 Empezamos con **ssh**, dentro del fichero que se encuentra en la ruta `/etc/ssh/sshd_config` modificaremos los siguientes parámetros.
 
 ![[ssh-config.png]]
 
+##### Reinicio del servicio SSH
 
+Primero habilitaremos el servicio para que este activo a la hora de iniciar el servidor.
+```bash
+sudo systemctl enable ssh
+```
 
+Pasaremos a reiniciar el servicio para aplicar los cambios que hemos realizado.
+```bash
+sudo systemctl restart ssh
+```
+
+Por ultimo verificaremos que el servicio este corriendo correctamente, el estado debe mostrar `Active (Running)`.
+```bash
+sudo systemctl status ssh
+```
+
+#### CHRONY
+Con esta herramienta solo verificaremos que este corriendo como servicio y su correcto funcionamiento.
+
+Habilitamos el servicio para que inicie junto con el servidor.
+```bash
+sudo systemctl enable chrony
+```
+
+Iniciamos el servicio.
+```bash
+sudo systemctl start chrony
+```
+
+Verificamos el estado del servicio debe mostrar `Active (Running)`.
+```bash
+sudo systemctl status chrony
+```
+
+Por ultimo verificaremos el funcionamiento de la herramienta.
+```bash
+chronyc tracking
+```
+
+Deberá mostrar algo así
+
+![[chrony-exit.png]]
+
+### Paso 3 - Configuración de MariaDB
+Ahora configuremos la base de datos, para esto debemos ejecutar el cliente y proceder a ingresar los siguientes parámetros.
+```bash
+mysql_secure_installation
+```
+- **Enter current password for root:** se introduce la contraseña del usuario root del servidor 
+- **Set root password?:** `y` - para aplicar la contraseña del usuario, en este caso va a ser `1234`. 
+- **Remove anonymous users? [Y/n]:** `y` - elimina usuarios anónimos por seguridad. 
+- **Disallow root login remotely? [Y/n]:** y - impide login directo de root desde la red; mejor usar cuentas limitadas. 
+- **Remove test database and access to it[Y/n]:** `y` - no dejar bases de datos de prueba en producción. 
+- **Reload privilege tables now? [Y/n]:** `y` - aplica cambios inmediatamente.
+
+Luego iniciaremos sesión en el cliente de la base de datos.
+```bash
+sudo mysql -u root -p1234
+```
+
+##### Tablas
+Por ultimo crearemos la base de datos junto a las tablas, las cuales son las siguientes:
+
+###### Usuarios
+| Column name    | Type         | Description                          |
+| -------------- | ------------ | ------------------------------------ |
+| id_usuario     | INT          | Identificador para el usuario.       |
+| usuario        | VARCHAR(50)  | Nombre de usuario.                   |
+| password       | VARCHAR(255) | Contraseña del usuario.              |
+| fecha_creacion | DATETIME     | Fecha de creación del usuario.       |
+| ultimo_acceso  | DATETIME     | Fecha del ultimo acceso del usuario. |
+###### Clientes
+| Column name | Type         | Description                     |
+| ----------- | ------------ | ------------------------------- |
+| id_clientes | INT          | Identificador para los clientes |
+| nombre      | VARCHAR(100) | Nombre de los clientes          |
+| direccion   | VARCHAR(100) | Dirección de los clientes       |
+| telefono    | VARCHAR(20)  | telefono de los clientes        |
+| email       | VARCHAR(100) | Correo de los clientes          |
+###### Producto
+| Column name  | Type            | Description                      |
+| ------------ | --------------- | -------------------------------- |
+| id_producto  | INT             | Identificador de los productos   |
+| codigo       | VARCHAR(50)     | Código de los productos          |
+| nombre       | VARCHAR(100)    | Nombre de los productos          |
+| descripcion  | TEXT            | Descripcion de los productos     |
+| categoria_id | INT             | Categoria de los productos       |
+| precio_venta | DECIMAL(10, 20) | Precio de venta de los productos |
+| stock_actual | INT             | Stock actual del producto        |
+| stock_minimo | INT             | Stock mínimo del procuctos       |
