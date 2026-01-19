@@ -53,8 +53,9 @@ sudo systemctl status mariadb
 Antes de configurar la base de datos, pasaremos a configurar los demás servicios necesarios para la conexión con los otros servidores y la sincronización del tiempo para los backups de la base de datos.
 
 Empezamos con **ssh**, dentro del fichero que se encuentra en la ruta `/etc/ssh/sshd_config` modificaremos los siguientes parámetros.
+<img width="650" height="248" alt="ssh-config" src="https://github.com/user-attachments/assets/d00b47b1-d1ec-4d33-a804-ff6644cab751" />
 
-![[ssh-config.png]]
+
 
 
 
