@@ -54,8 +54,9 @@ Antes de configurar la base de datos, pasaremos a configurar los demás servicio
 
 #### SSH
 Empezamos con **ssh**, dentro del fichero que se encuentra en la ruta `/etc/ssh/sshd_config` modificaremos los siguientes parámetros.
+<img width="650" height="248" alt="ssh-config" src="https://github.com/user-attachments/assets/d00b47b1-d1ec-4d33-a804-ff6644cab751" />
 
-![[ssh-config.png]]
+
 
 ##### Reinicio del servicio SSH
 
