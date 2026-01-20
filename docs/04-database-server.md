@@ -118,8 +118,23 @@ Luego iniciaremos sesión en el cliente de la base de datos.
 sudo mysql -u root -p1234
 ```
 
-##### Tablas
-Por ultimo crearemos la base de datos junto a las tablas, las cuales son las siguientes:
+Dentro crearemos un usuario llamado erp_user el cual usaremos para hacer las conexiones con la base de datos.
+
+```sql
+CREATE USER 'erp_user'@'%' IDENTIFIED BY '1234';
+```
+
+Le daremos privilegios para manejar las base de datos creadas
+
+```sql
+GRANT ALL PRIVILEGES ON ERP_Frutas.* TO 'erp_user'@'%';
+GRANT ALL PRIVILEGES ON Prueba_DB.* TO 'erp_user'@'%';
+```
+
+> :exclamation: **Aviso**: Por motivos de prueba se le esta dando máximos privilegios a el usuario **erp_user** lo cual en un entorno de producción es una mala practica de seguridad, se recomienda usar el principio de mínimo privilegio en entornos de producción.
+
+##### BASE DE DATOS ERP_FRUTAS - TABLAS
+Crearemos la base de datos junto a las tablas, las cuales son las siguientes:
 
 ###### Usuarios
 | Column name    | Type         | Description                          |
@@ -148,3 +163,11 @@ Por ultimo crearemos la base de datos junto a las tablas, las cuales son las sig
 | precio_venta | DECIMAL(10, 20) | Precio de venta de los productos |
 | stock_actual | INT             | Stock actual del producto        |
 | stock_minimo | INT             | Stock mínimo del procuctos       |
+##### BASE DE DATOS PRUEBA_DB - TABLAS
+Por ultimo crearemos una ultima base de datos para probar el funcionamiento de la función de creación y almacenamiento del respaldo en el servidor NAS.
+
+| Column Name | Data Type    | Constraints                 | Description                                         |
+| ----------- | ------------ | --------------------------- | --------------------------------------------------- |
+| `id`        | INT          | PRIMARY KEY, AUTO_INCREMENT | Identificador                                       |
+| `nombre`    | VARCHAR(100) | NOT NULL                    | Nombre de prueba                                    |
+| `valor`     | INT          | NOT NULL                    | Valor numérico usado para la prueba de recuperacion |
