@@ -1,3 +1,8 @@
+## Características del servidor VM
+- Nombre: web_frutas
+- SO: Debian 12
+- Almacenamiento: 20GB
+- RAM: 2048MB (4GB)
 # Instalación y Configuración del Web Server
 
 Primero pasaremos a actualizar los paquetes del servidor e instalaremos los siguientes paquetes:

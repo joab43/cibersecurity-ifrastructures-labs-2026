@@ -1,6 +1,6 @@
 # Servidor de Base de Datos
 
-## Caracteristicas del servidor VM
+## Características del servidor VM
 - Nombre: db_frutas
 - SO: Debian 12
 - Almacenamiento: 20GB
