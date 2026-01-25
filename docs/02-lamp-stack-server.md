@@ -49,7 +49,7 @@ Por ultimo verificaremos en el navegador introduciendo la ip del servidor web, e
 
 ![[Pasted image 20260120162606.png]]
 
-![Verficación de apache web](../images/Pasted image 20260120162606.png)
+![Verficación de apache web](../images/Pasted%20image%2020260120162606.png)
 
 ## Paso 3 - Creación de aplicación web de prueba
 Ahora crearemos una aplicación web de prueba para ver la funcionalidad de la conexión con el servidor de la base de datos. 
