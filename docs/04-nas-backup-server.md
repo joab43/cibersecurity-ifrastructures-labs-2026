@@ -9,7 +9,7 @@
 ## Configuración del Servidor NAS 
 Antes de empezar a configurar el servidor NAS crearemos y le añadiremos 2 disco duros virtuales en el hipervisor utilizado.
 
-![[Pasted image 20260120170410.png]]
+![](../images/Pasted%20image%2020260120170410.png)
 
 Podemos ver que el disco nas-frutas_1.vdi tiene un tamaño de 25.00GB y el nas-frutas_2.vdi tiene un tamaño de 12.00GB.
 
@@ -35,7 +35,7 @@ Empezamos ejecutando el comando fdisk –l para ver lo siguiente:
 sudo fdisk -l
 ```
 
-![[Pasted image 20260120174520.png]]
+![](../images/Pasted%20image%2020260120174520.png)
 
 Haremos el particionado de la siguiente forma: 
 
@@ -64,7 +64,8 @@ Haremos el mismo proceso para el disco número dos con la diferencia que los 10G
 - **+10G:** para indicar el tamaño de la partición.
 
 Ahora verificaremos las particiones creadas y veremos que efectivamente las particiones en el disco sed se ha creado como sdb1, sdb2, sdb3.
-![[Pasted image 20260120180023.png]]
+
+![](../images/Pasted%20image%2020260120180023.png)
 
 ## Paso 4 - Creación del RAID 1
 Ahora para crear el arreglo tipo RAID-1 ejecutaremos el siguiente comando:
@@ -79,7 +80,8 @@ Para verificar que el arreglo se haya creado buscaremos el archivo mdstat en el 
 cat /proc/mdstat
 ```
 
-![[Pasted image 20260120180518.png]]
+
+![](../images/Pasted%20image%2020260120180518.png)
 
 Ahora formatearemos el RAID en formato ext4 para poder montarlo como unidad.
 
@@ -119,7 +121,8 @@ Ahora pasaremos a configurar la memoria swap, para esto debemos formatearla para
 mkswap /dev/sdb3
 ```
 
-![[Pasted image 20260120182057.png]]
+
+![](../images/Pasted%20image%2020260120182057.png)
 
 ```bash
 swapon --show
@@ -136,5 +139,5 @@ Una vez hecho esto reiniciaremos el servidor para posterior mente comprobar el c
 sudo cat /proc/mdstat
 ```
 
-![[Pasted image 20260120182419.png]]
+![](../images/Pasted%20image%2020260120182419.png)
 

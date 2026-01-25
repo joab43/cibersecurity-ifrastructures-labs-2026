@@ -47,8 +47,6 @@ sudo systemctl status apache2
 
 Por ultimo verificaremos en el navegador introduciendo la ip del servidor web, en este caso es la `192.168.0.10`
 
-![[Pasted image 20260120162606.png]]
-
 ![Verficación de apache web](../images/Pasted%20image%2020260120162606.png)
 
 ## Paso 3 - Creación de aplicación web de prueba
@@ -95,11 +93,12 @@ $conn->close();
 
 El resultado sería poder ver los registros de la tabla clientes y una confirmación de una correcta conexión a la base de datos.
 
-![[Pasted image 20260120163556.png]]
+![Demostracion de la tabla](../images/Pasted%20image%2020260120163556.png)
 
 Por ultimo en el servidor web realizaremos algunas configuraciones de seguridad. Editaremos el fichero `apache2.conf` en la ruta `/etc/apache2/` y verificamos que en el parámetro options este asignado a `FollowSymLinks.`
 
-![[Pasted image 20260120165306.png]]
+
+![](../images/Pasted%20image%2020260120165306.png)
 
 ## Paso 4 - Instalación de firewall
 También instalaremos el firewall `ufw` para asegurar el servidor web
