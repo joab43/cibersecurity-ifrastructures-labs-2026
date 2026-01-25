@@ -62,4 +62,28 @@ sudo chmod 700 /vas/opt/Respaldo/backup.sh
 sudo chown root:root /var/opt/Respaldo/backup.sh
 ```
 
-Copiamos el siguiente código del archivo `backup.sh` que se encuentra en el repositorio y lo pegan en el archivo que ustedes hayan creado con extensión `.sh`. 
+Copiamos el código del archivo `backup.sh` que se encuentra en el repositorio y lo pegan en el archivo que ustedes hayan creado con el formato `.sh`. 
+
+# Paso 6 - Prueba del script
+
+Haremos una prueba de que el script funciona, para ello lo ejecutaremos manual mente, pero antes de ejecutar el **scirpt** haremos que el usuario `nas_user` en el servidor `NAS` sea propietario de la carpeta **RespaldHistorico** para que tenga permisos de crear y almacenar los respaldos.
+
+```bash
+sudo chown -R nas_user:nas_user /var/opt/RespaldoHistorico
+```
+
+```bash
+sudo chmod 775 /var/opt/respaldoHistorico
+```
+
+Ahora pasaremos a ejecutar el script en el servidor de la base de datos de la siguiente forma:
+
+```bash
+/var/opt/Respaldo/backup.sh
+```
+
+![[Pasted image 20260125154737.png]]
+
+Podemos observar que el script ha funcionado correctamente y el respaldo se ha creado en el servidor `NAS`, con la herramienta `tree` podemos ver los archivos y directorios creados en la carpeta `RespaldoHistorico`.
+
+![[Pasted image 20260125154802.png]]
