@@ -82,8 +82,8 @@ Ahora pasaremos a ejecutar el script en el servidor de la base de datos de la si
 /var/opt/Respaldo/backup.sh
 ```
 
-![[Pasted image 20260125154737.png]]
+![](../images/Pasted%20image%2020260125154737.png)
 
 Podemos observar que el script ha funcionado correctamente y el respaldo se ha creado en el servidor `NAS`, con la herramienta `tree` podemos ver los archivos y directorios creados en la carpeta `RespaldoHistorico`.
 
-![[Pasted image 20260125154802.png]]
+![](../images/Pasted%20image%2020260125154802.png)
